@@ -283,7 +283,7 @@
                     <label for="c2">2학점</label>
                 </div>
                 <div class="radio-option">
-                    <input type="radio" name="credits" id="c3" value="3" checked>
+                    <input type="radio" name="credits" id="c3" value="3">
                     <label for="c3">3학점</label>
                 </div>
             </div>
@@ -297,7 +297,7 @@
                     <label for="f1">주 1회 (연강)</label>
                 </div>
                 <div class="radio-option">
-                    <input type="radio" name="freq" id="f2" value="2" checked>
+                    <input type="radio" name="freq" id="f2" value="2">
                     <label for="f2">주 2회</label>
                 </div>
                 <div class="radio-option">
@@ -390,10 +390,18 @@
         });
 
         function calculate() {
-            // --- 1. 입력값 가져오기 ---
+            // --- 1. 입력값 가져오기 및 검증 ---
             // querySelector로 라디오 버튼 체크된 값 가져오기
-            const credits = parseInt(document.querySelector('input[name="credits"]:checked').value);
-            const frequency = parseInt(document.querySelector('input[name="freq"]:checked').value);
+            const creditsRadio = document.querySelector('input[name="credits"]:checked');
+            const freqRadio = document.querySelector('input[name="freq"]:checked');
+
+            if (!creditsRadio || !freqRadio) {
+                alert("⚠️ 학점과 수업 횟수를 모두 선택해주세요!");
+                return;
+            }
+
+            const credits = parseInt(creditsRadio.value);
+            const frequency = parseInt(freqRadio.value);
 
             const absentCnt = parseInt(document.getElementById('absent').value) || 0;
             const lateCnt = parseInt(document.getElementById('late').value) || 0;
