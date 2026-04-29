@@ -226,7 +226,7 @@
                 box-shadow: none;
                 padding: 20px;
                 min-height: 100vh;
-                /* 화면 꽉 차게 */
+                min-height: 100dvh;
             }
 
             h1 {
@@ -236,15 +236,16 @@
 
             .btn-calc {
                 padding: 16px;
-                /* 터치 영역 확대 */
-                position: sticky;
-                bottom: 20px;
                 box-shadow: 0 4px 12px rgba(0, 64, 148, 0.3);
+            }
+
+            .radio-option label {
+                font-size: 0.8rem;
+                padding: 10px 5px;
             }
 
             select,
             input[type="number"] {
-                font-size: 16px;
                 font-size: 16px;
                 /* iOS 줌인 방지 */
             }
@@ -253,10 +254,6 @@
             @supports (padding-bottom: env(safe-area-inset-bottom)) {
                 .container {
                     padding-bottom: calc(20px + env(safe-area-inset-bottom));
-                }
-
-                .btn-calc {
-                    bottom: calc(20px + env(safe-area-inset-bottom));
                 }
             }
         }
@@ -486,6 +483,7 @@
             // HTML 주입
             resultDiv.className = cssClass;
             resultDiv.style.display = "block";
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             resultDiv.innerHTML = `
             <div class="result-header">${title}</div>
             <div class="result-detail">
